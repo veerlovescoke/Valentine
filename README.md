@@ -1,1 +1,150 @@
 # Valentine
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Vitu 💗</title>
+<style>
+body{
+    margin:0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(120deg,#ffd6e8,#ffeef6);
+    overflow:hidden;
+}
+
+section{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+h1{
+    font-size:60px;
+    color:#ff4d88;
+}
+
+p{
+    font-size:26px;
+    color:#444;
+    max-width:800px;
+}
+
+button{
+    padding:15px 40px;
+    border:none;
+    border-radius:30px;
+    background:#ff4d88;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.heart{
+    position:absolute;
+    color:#ff6fa5;
+    font-size:20px;
+    animation:float 6s infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh); opacity:1;}
+    to{transform:translateY(-10vh); opacity:0;}
+}
+
+.card{
+    background:white;
+    padding:30px;
+    margin:15px;
+    border-radius:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    font-size:22px;
+}
+
+.hidden{display:none;}
+
+#noBtn{
+    position:absolute;
+}
+</style>
+</head>
+
+<body>
+
+<section id="page1">
+<h1>Hey Vitu 💕</h1>
+<p>I made something soft & special just for you ✨</p>
+<button onclick="nextPage(2)">Open My Heart 💗</button>
+</section>
+
+<section id="page2" class="hidden">
+<h1>💌</h1>
+<p id="typing"></p>
+<button onclick="nextPage(3)">Next 🌸</button>
+</section>
+
+<section id="page3" class="hidden">
+<div class="card">You make my days brighter ☀️</div>
+<div class="card">Your smile is my favorite thing 💖</div>
+<div class="card">I feel calm when I think of you 🌷</div>
+<button onclick="nextPage(4)">One Last Thing 💕</button>
+</section>
+
+<section id="page4" class="hidden">
+<h1>Will you be my Valentine, Vitu? 💖</h1>
+<button onclick="yesLove()">YES 💕</button>
+<button id="noBtn" onmouseover="moveNo()">No 🙃</button>
+</section>
+
+<script>
+function nextPage(n){
+    document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
+    document.getElementById("page"+n).classList.remove("hidden");
+}
+
+const text = "Every moment feels softer and happier with you in it, Vitu 💗";
+let i=0;
+function type(){
+    if(i<text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type,70);
+    }
+}
+type();
+
+function moveNo(){
+    const btn = document.getElementById("noBtn");
+    btn.style.left = Math.random()*80 + "%";
+    btn.style.top = Math.random()*80 + "%";
+}
+
+function yesLove(){
+    document.body.innerHTML = `
+    <section>
+    <h1>YAYYYY 💕🥹</h1>
+    <p>You just made my heart very happy 💗🌸</p>
+    </section>`;
+}
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💗";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*30)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
